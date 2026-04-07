@@ -2,7 +2,7 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <title>Mencari Jodoh</title>
+    <title>Apasih</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -94,7 +94,6 @@
     </div>
 
     <script>
-      
       const profiles = [
         { name: 'Farhat, 21', bio: 'Suka ngopi ☕', img: 'https://i.pravatar.cc/300?img=1' },
         { name: 'Rian, 22', bio: 'Hobi traveling ✈️', img: 'https://i.pravatar.cc/300?img=2' },
@@ -111,6 +110,18 @@
 
         // sembunyikan tombol WA tiap ganti profil
         document.getElementById('waBtn').style.display = 'none';
+
+        // ambil tombol skip
+        const skipBtn = document.querySelector('.skip');
+
+        // kalau Fathy → disable skip
+        if (profiles[index].name.includes('Fathy')) {
+          skipBtn.disabled = true;
+          skipBtn.innerText = 'Tidak bisa skip 😏';
+        } else {
+          skipBtn.disabled = false;
+          skipBtn.innerText = 'Skip';
+        }
       }
 
       function nextProfile() {

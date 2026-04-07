@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mencari Jodoh</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .card {
+        background: white;
+        width: 300px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+
+      .card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .info {
+        padding: 15px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+      }
+
+      button {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .like {
+        background: #4caf50;
+        color: white;
+      }
+      .skip {
+        background: #f44336;
+        color: white;
+      }
+
+      .notif {
+        position: absolute;
+        top: 20px;
+        background: yellow;
+        padding: 10px;
+        border-radius: 10px;
+        display: none;
+        font-weight: bold;
+      }
+
+      .wa-btn {
+        display: none;
+        margin-top: 10px;
+        background: #25d366;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="notif" id="notifText"></div>
+
+    <div class="card">
+      <img id="photo" src="https://i.pravatar.cc/300?img=1" />
+      <div class="info">
+        <h2 id="name">Farhat, 21</h2>
+        <p id="bio">Suka ngopi dan jalan santai ☕</p>
+
+        <button class="wa-btn" id="waBtn" onclick="openWA()">Hubungi via WhatsApp</button>
+      </div>
+
+      <div class="buttons">
+        <button class="skip" onclick="nextProfile()">Skip</button>
+        <button class="like" onclick="likeProfile()">Like</button>
+      </div>
+    </div>
+
+    <script>
+      const profiles = [
+        { name: 'Farhat, 21', bio: 'Suka ngopi ☕', img: 'https://i.pravatar.cc/300?img=1' },
+        { name: 'Rian, 22', bio: 'Hobi traveling ✈️', img: 'https://i.pravatar.cc/300?img=2' },
+        { name: 'Ling, 20', bio: 'Pecinta kucing 🐱', img: 'https://i.pravatar.cc/300?img=3' },
+        { name: 'Fathy, 20', bio: 'Sederhana dan cocok sekali dengan anda', img: 'fathy.jpeg', wa: '62895384307300' },
+      ];
+
+      let index = 0;
+
+      function showProfile() {
+        document.getElementById('name').innerText = profiles[index].name;
+        document.getElementById('bio').innerText = profiles[index].bio;
+        document.getElementById('photo').src = profiles[index].img;
+
+        // sembunyikan tombol WA tiap ganti profil
+        document.getElementById('waBtn').style.display = 'none';
+      }
+
+      function nextProfile() {
+        index = (index + 1) % profiles.length;
+        showProfile();
+      }
+
+      function showNotif(text) {
+        const notif = document.getElementById('notifText');
+        notif.innerText = text;
+        notif.style.display = 'block';
+
+        setTimeout(() => {
+          notif.style.display = 'none';
+        }, 1200);
+      }
+
+      function likeProfile() {
+        if (profiles[index].name.includes('Fathy')) {
+          showNotif('Cocok! 😍');
+
+          // tampilkan tombol WA
+          document.getElementById('waBtn').style.display = 'block';
+        } else {
+          showNotif('Ah maaf, kamu tidak cocok 😢');
+          setTimeout(nextProfile, 1200);
+        }
+      }
+
+      function openWA() {
+        const number = profiles[index].wa;
+        const message = encodeURIComponent('Hai, kita cocok nih 😄');
+        window.open(`https://wa.me/${number}?text=${message}`, '_blank');
+      }
+    </script>
+  </body>
+</html>

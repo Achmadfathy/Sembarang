@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Halaman utama</title>
+
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -22,17 +23,10 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       }
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-      }
-
       input {
         width: 100%;
         padding: 10px;
         margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
       }
 
       button {
@@ -41,17 +35,33 @@
         background: #4caf50;
         color: white;
         border: none;
-        border-radius: 5px;
         cursor: pointer;
       }
     </style>
   </head>
+
   <body>
-    <form action="index.html">
-      <label for="username">Masukkan Namamu</label>
-      <input type="text" id="username" name="username" required />
-      <br /><br />
+    <form onsubmit="simpanNama(event)">
+      <label>Masukkan Namamu</label>
+      <input type="text" id="username" required />
       <button type="submit">Masuk</button>
     </form>
+
+    <script>
+      function simpanNama(e) {
+        e.preventDefault(); // biar gak reload default
+
+        const nama = document.getElementById('username').value;
+
+        // simpan ke localStorage
+        localStorage.setItem('namaUser', nama);
+        if (localStorage.getItem("namaUser")) {
+  window.location.href = "index.html";
+}
+
+        // pindah ke index
+        window.location.href = 'index.html';
+      }
+    </script>
   </body>
 </html>

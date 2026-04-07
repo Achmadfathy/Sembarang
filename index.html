@@ -94,6 +94,13 @@
     </div>
 
     <script>
+      const nama = localStorage.getItem("namaUser");
+
+// kalau belum login → balik ke login
+if (!nama) {
+  window.location.href = "login.html";
+}
+      
       const profiles = [
         { name: 'Farhat, 21', bio: 'Suka ngopi ☕', img: 'https://i.pravatar.cc/300?img=1' },
         { name: 'Rian, 22', bio: 'Hobi traveling ✈️', img: 'https://i.pravatar.cc/300?img=2' },
